@@ -1,9 +1,6 @@
-.PHONY: all install clean
+.PHONY: default
 
-all: install
+default: init
 
-install:
+init:
 	pip install -r requirements.txt
-
-clean:
-	pip uninstall -r requirements.txt
