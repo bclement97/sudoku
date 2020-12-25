@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class Puzzle:
+class Grid:
     def __init__(self):
         self._M = np.zeros(9, 9)
 
