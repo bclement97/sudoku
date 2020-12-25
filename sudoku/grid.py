@@ -22,18 +22,18 @@ class Grid:
 
     def set(self, col: int, row: int, value: int) -> bool:
         self._M[col, row] = value
-        return self.validate_entry(col, row)
+        return self.validate_cell(col, row)
 
     def clear(self, col: int, row: int) -> None:
         self.set(col, row, 0)
 
-    def validate_entry(self, col: int, row: int) -> bool:
-        def validate(entries: np.ndarray) -> bool:
-            nonzero_entries = entries[entries > 0]
-            return nonzero_entries.size == np.unique(nonzero_entries).size
+    def validate_cell(self, col: int, row: int) -> bool:
+        def validate_group(elems: np.ndarray) -> bool:
+            nonzero_elems = elems[elems > 0]
+            return nonzero_elems.size == np.unique(nonzero_elems).size
 
         box = 3*(row//3) + col//3
-        valid_col = validate(self.col(col))
-        valid_row = validate(self.row(row))
-        valid_box = validate(self.box(box))
+        valid_col = validate_group(self.col(col))
+        valid_row = validate_group(self.row(row))
+        valid_box = validate_group(self.box(box))
         return valid_col and valid_row and valid_box
