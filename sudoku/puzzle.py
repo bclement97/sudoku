@@ -32,7 +32,7 @@ class Puzzle:
             nonzero_entries = entries[entries > 0]
             return nonzero_entries.size == np.unique(nonzero_entries).size
 
-        box = (row // 3) * 3 + (col // 3)
+        box = 3*(row//3) + col//3
         valid_col = validate(self.col(col))
         valid_row = validate(self.row(row))
         valid_box = validate(self.box(box))
