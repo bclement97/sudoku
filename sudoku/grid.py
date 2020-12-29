@@ -4,6 +4,7 @@ import numpy as np
 class Grid:
     DIM = 9
     SIZE = (DIM, DIM)
+    EMPTY_CELL = 0
 
     def __init__(self, src: np.ndarray = None):
         self._M = src.reshape(Grid.SIZE) if src is not None else np.zeros(Grid.SIZE)
@@ -28,12 +29,12 @@ class Grid:
         return self.validate_cell(col, row)
 
     def clear(self, col: int, row: int) -> None:
-        self.set(col, row, 0)
+        self.set(col, row, Grid.EMPTY_CELL)
 
     def validate_cell(self, col: int, row: int) -> bool:
-        def validate_group(elems: np.ndarray) -> bool:
-            nonzero_elems = elems[elems > 0]
-            return nonzero_elems.size == np.unique(nonzero_elems).size
+        def validate_group(cells: np.ndarray) -> bool:
+            elems = cells[cells != Grid.EMPTY_CELL]
+            return elems.size == np.unique(elems).size
 
         box = 3*(row//3) + col//3
         valid_col = validate_group(self.col(col))
