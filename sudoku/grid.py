@@ -5,8 +5,8 @@ class Grid:
     DIM = 9
     SIZE = (DIM, DIM)
 
-    def __init__(self):
-        self._M = np.zeros(Grid.SIZE)
+    def __init__(self, src: np.ndarray = None):
+        self._M = src.reshape(Grid.SIZE) if src is not None else np.zeros(Grid.SIZE)
 
     def col(self, i: int) -> np.ndarray:
         return self._M[:, i]
