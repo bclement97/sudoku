@@ -9,7 +9,7 @@ class Grid:
 
     def __init__(self, src: np.ndarray = None):
         self._M = (src.reshape(Grid.SIZE) if src is not None
-                   else np.zeros(Grid.SIZE))
+                   else np.full(Grid.SIZE, Grid.EMPTY_CELL))
 
     def row(self, i: int) -> np.ndarray:
         """Return the i-th row."""
