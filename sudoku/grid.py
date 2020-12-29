@@ -19,10 +19,10 @@ class Grid:
 
     def box(self, i: int) -> np.ndarray:
         # Since NumPy is row major, so are the boxes
-        row_start = self.BOX_DIM * (i // self.BOX_DIM)
-        row_end = row_start + self.BOX_DIM
-        col_start = self.BOX_DIM * (i % self.BOX_DIM)
-        col_end = col_start + self.BOX_DIM
+        row_start = Grid.BOX_DIM * (i // Grid.BOX_DIM)
+        row_end = row_start + Grid.BOX_DIM
+        col_start = Grid.BOX_DIM * (i % Grid.BOX_DIM)
+        col_end = col_start + Grid.BOX_DIM
         return self._M[row_start:row_end, col_start:col_end]
 
     def get(self, row: int, col: int) -> int:
@@ -40,7 +40,7 @@ class Grid:
             elems = cells[cells != Grid.EMPTY_CELL]
             return elems.size == np.unique(elems).size
 
-        box = self.BOX_DIM * (row // self.BOX_DIM) + col // self.BOX_DIM
+        box = Grid.BOX_DIM * (row // Grid.BOX_DIM) + col // Grid.BOX_DIM
         valid_row = validate_group(self.row(row))
         valid_col = validate_group(self.col(col))
         valid_box = validate_group(self.box(box))
