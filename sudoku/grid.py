@@ -8,7 +8,8 @@ class Grid:
     EMPTY_CELL = 0
 
     def __init__(self, src: np.ndarray = None):
-        self._M = src.reshape(Grid.SIZE) if src is not None else np.zeros(Grid.SIZE)
+        self._M = (src.reshape(Grid.SIZE) if src is not None
+                   else np.zeros(Grid.SIZE))
 
     def col(self, i: int) -> np.ndarray:
         return self._M[:, i]
