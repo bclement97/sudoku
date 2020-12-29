@@ -2,8 +2,11 @@ import numpy as np
 
 
 class Grid:
+    DIM = 9
+    SIZE = (DIM, DIM)
+
     def __init__(self):
-        self._M = np.zeros(9, 9)
+        self._M = np.zeros(Grid.SIZE)
 
     def col(self, i: int) -> np.ndarray:
         return self._M[:, i]
