@@ -32,7 +32,7 @@ class Grid:
         return self.validate_cell(col, row)
 
     def clear(self, col: int, row: int) -> None:
-        self.set(col, row, Grid.EMPTY_CELL)
+        self._M[col, row] = Grid.EMPTY_CELL
 
     def validate_cell(self, col: int, row: int) -> bool:
         def validate_group(cells: np.ndarray) -> bool:
