@@ -3,6 +3,7 @@ import numpy as np
 
 class Grid:
     DIM = 9
+    BOX_DIM = 3
     SIZE = (DIM, DIM)
     EMPTY_CELL = 0
 
@@ -17,9 +18,11 @@ class Grid:
 
     def box(self, i: int) -> np.ndarray:
         # Since NumPy is row major, so are the boxes
-        col_start = i // 3
-        row_start = i % 3
-        return self._M[col_start:col_start+3, row_start:row_start+3]
+        col_start = i // self.BOX_DIM
+        col_end = col_start + self.BOX_DIM
+        row_start = i % self.BOX_DIM
+        row_end = row_start + self.BOX_DIM
+        return self._M[col_start:col_end, row_start:row_end]
 
     def get(self, col: int, row: int) -> int:
         return self._M[col, row]
@@ -36,7 +39,7 @@ class Grid:
             elems = cells[cells != Grid.EMPTY_CELL]
             return elems.size == np.unique(elems).size
 
-        box = 3*(row//3) + col//3
+        box = self.BOX_DIM * (row // self.BOX_DIM) + col // self.BOX_DIM
         valid_col = validate_group(self.col(col))
         valid_row = validate_group(self.row(row))
         valid_box = validate_group(self.box(box))
